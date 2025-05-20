@@ -20,33 +20,64 @@ export default function Projects() {
   const projects = [
     {
       id: 1,
-      title: "E-Commerce Platform",
+      title: "BARS - Bisaya Assistant Rap System",
       description:
-        "A full-stack e-commerce platform built with Next.js, TypeScript, and Stripe integration for payments.",
-      image: "/placeholder.svg?height=400&width=600",
-      tags: ["Next.js", "TypeScript", "Stripe", "Tailwind CSS"],
-      github: "https://github.com",
-      demo: "https://demo.com",
+        "A full-stack AI assistant rap system that helps users asists their bisaya rap lyrics, simulating almost like VSCode which auto completes and guides uses with suggestions. Integrates JWT Authentication, Collaboration, and Uploading and Downloading Files.",
+      image: "/images/BARS.png",
+      tags: [
+        "Monorepo",
+        "Turborepo",
+        "Next.js",
+        "Prisma",
+        "Nest.js",
+        "Flask",
+        "Neon",
+        "Filen",
+        "Node.js",
+        "JWT",
+      ],
+      github: "https://github.com/Eloe321/BARS",
+      demo: "Under Development",
     },
     {
       id: 2,
-      title: "AI Content Generator",
+      title: "CITU SSG Elections",
       description:
-        "An AI-powered content generation tool using OpenAI's GPT models with a React frontend and Node.js backend.",
-      image: "/placeholder.svg?height=400&width=600",
-      tags: ["React", "Node.js", "OpenAI", "Express"],
-      github: "https://github.com",
-      demo: "https://demo.com",
+        "A Website to Update the students on the standings of the current SSG Elections. Uses Full stack of NextJS, NestJS, Mongoose, and MongoDB",
+      image: "/images/SSG_Elections.png",
+      tags: ["Next.js", "Nest.js", "Node.js", "Mongoose", "MongoDB", "Docker"],
+      github: "https://github.com/Wetooa/CITU-SSG-Elections/tree/dev",
+      demo: "https://citu-ssg-elections.vercel.app/",
     },
     {
       id: 3,
-      title: "Real-time Chat Application",
+      title: "Project CITU Intramurals 2025",
       description:
-        "A real-time chat application with WebSocket integration, user authentication, and message encryption.",
-      image: "/placeholder.svg?height=400&width=600",
-      tags: ["Socket.io", "React", "MongoDB", "JWT"],
-      github: "https://github.com",
-      demo: "https://demo.com",
+        "A website that integrates data collection which then is displayed for the users to be updated on the current standings of the Intramurals 2025",
+      image: "/images/Intrams.png",
+      tags: ["Next.js", "Nest.js", "Node.js", "Excel"],
+      github: "https://github.com/Wetooa/CITU-Intramurals-2025",
+      demo: "https://project-citu-intramurals-2025.vercel.app/",
+    },
+    {
+      id: 4,
+      title: "TekNotes",
+      description:
+        "A Note taking website that simulates a social media platform where users can share notes seemlessly which also integrates a real time chat system, with the constraints of using only django.",
+      image: "/images/TekNotes-Icon.png",
+      tags: ["html", "Javascript", "Django"],
+      github: "https://github.com/Wetooa/TekNotes",
+      demo: "Not Deployed",
+    },
+    {
+      id: 5,
+      title: "Techonologian Project Halalan 2025",
+      description:
+        "A website that displays the current standings of the Halalan 2025",
+      image: "/images/Halalan.png",
+      tags: ["Next.js", "Typescript", "Node.js"],
+      github: "https://github.com/Wetooa/techonologian-project-halalan-2025",
+      demo: "https://techonologian-project-halalan-2025.vercel.app/",
     },
   ];
 
@@ -117,14 +148,14 @@ function ProjectCard({ project, index }: { project: any; index: number }) {
         <CardContent className="p-0">
           <div className="grid gap-6 md:grid-cols-2">
             <motion.div
-              className="relative overflow-hidden"
+              className="relative overflow-hidden h-[250px] flex items-center justify-center"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             >
               <img
                 src={project.image || "/placeholder.svg"}
                 alt={project.title}
-                className="h-full w-full object-cover"
+                className="h-full w-full object-contain"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
             </motion.div>
@@ -148,17 +179,51 @@ function ProjectCard({ project, index }: { project: any; index: number }) {
               </div>
 
               <div className="mt-auto flex gap-4">
-                <Button variant="outline" size="sm" className="gap-2">
-                  <Github size={16} />
-                  <span>Code</span>
+                <Button variant="outline" size="sm" className="gap-2" asChild>
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Github size={16} />
+                    <span>Code</span>
+                  </a>
                 </Button>
-                <Button
-                  size="sm"
-                  className="gap-2 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600"
-                >
-                  <ExternalLink size={16} />
-                  <span>Live Demo</span>
-                </Button>
+                {project.demo !== "Not Deployed" &&
+                project.demo !== "Under Development" ? (
+                  <Button
+                    size="sm"
+                    className="gap-2 bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600"
+                    asChild
+                  >
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <ExternalLink size={16} />
+                      <span>Live Demo</span>
+                    </a>
+                  </Button>
+                ) : project.demo === "Not Deployed" ? (
+                  <Button
+                    size="sm"
+                    className="gap-2 bg-gray-500 hover:bg-gray-600 cursor-not-allowed"
+                    disabled
+                  >
+                    <ExternalLink size={16} />
+                    <span>Not Deployed</span>
+                  </Button>
+                ) : (
+                  <Button
+                    size="sm"
+                    className="gap-2 bg-gray-500 hover:bg-gray-600 cursor-not-allowed"
+                    disabled
+                  >
+                    <ExternalLink size={16} />
+                    <span>Under Development</span>
+                  </Button>
+                )}
               </div>
             </div>
           </div>

@@ -19,30 +19,49 @@ export default function Experience() {
   const experiences = [
     {
       id: 1,
-      role: "Senior Frontend Developer",
-      company: "Tech Innovations Inc.",
-      period: "2021 - Present",
+      role: "Website Associate",
+      company: "The Technologian",
+      period: "2023 - Present",
       description:
-        "Led the development of the company's flagship SaaS product, improving performance by 40%. Mentored junior developers and implemented modern CI/CD practices.",
-      technologies: ["React", "TypeScript", "Next.js", "GraphQL"],
+        "Participated in many projects from the organization, from website development to website maintenance.",
+      technologies: [
+        "React",
+        "TypeScript",
+        "Next.js",
+        "Nest.js",
+        "Node.js",
+        "MongoDB",
+        "PostgreSQL",
+        "Docker",
+        "Vercel",
+        "Vibes",
+      ],
     },
     {
       id: 2,
-      role: "Full Stack Developer",
-      company: "Digital Solutions Ltd.",
-      period: "2018 - 2021",
+      role: "CITU Student",
+      company: "Cebu Institute of Technology - University",
+      period: "2021 - 2026",
       description:
-        "Developed and maintained multiple client projects, from e-commerce platforms to data visualization dashboards. Collaborated with design and product teams.",
-      technologies: ["JavaScript", "Node.js", "MongoDB", "Express"],
+        "Has been through the hardships of being a Computer Science Student in CITU, Learned many concepts and algorithms",
+      technologies: [
+        "C",
+        "C++",
+        "Java",
+        "Python",
+        "Data Structure Algorithms",
+        "Object Oriented Programming",
+        "Intellegent Systems",
+      ],
     },
     {
       id: 3,
-      role: "Junior Web Developer",
-      company: "Creative Web Agency",
-      period: "2016 - 2018",
+      role: "Audience",
+      company: "Hackathon",
+      period: "2021 - 2023",
       description:
-        "Built responsive websites and implemented interactive features for various clients. Assisted in the development of the company's internal CMS.",
-      technologies: ["HTML/CSS", "JavaScript", "PHP", "MySQL"],
+        "I've observed many hackathons to understand practices, strategies, and ideas",
+      technologies: ["Next.js", "Nest.js", "PHP", "Databases", "AI"],
     },
   ];
 
@@ -64,10 +83,10 @@ export default function Experience() {
           className="mb-16 text-center"
         >
           <h2 className="mb-4 text-4xl font-bold tracking-tighter sm:text-5xl">
-            Work Experience
+            Coding Experience
           </h2>
           <p className="mx-auto max-w-2xl text-gray-400">
-            My professional journey and the companies I've collaborated with.
+            My Coding journey and the organizations I've collaborated with.
           </p>
         </motion.div>
 

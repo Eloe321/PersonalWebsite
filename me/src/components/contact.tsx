@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -18,6 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, Github, Linkedin, Facebook } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -35,6 +36,8 @@ export default function Contact() {
   const containerRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const isHeaderInView = useInView(headerRef, { once: false, amount: 0.3 });
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -52,9 +55,47 @@ export default function Contact() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    // In a real application, you would send this data to your server
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsSubmitting(true);
+    try {
+      const response = await fetch("/api", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: values.name,
+          email: values.email,
+          message: values.message,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        toast({
+          title: "Message sent!",
+          description: "Thank you for contacting me. I'll respond shortly.",
+          variant: "default",
+        });
+        form.reset();
+      } else {
+        toast({
+          title: "Something went wrong",
+          description:
+            data.error || "Failed to send message, please try again.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   const socialLinks = [
@@ -111,7 +152,12 @@ export default function Contact() {
 
         <div className="mx-auto grid max-w-4xl gap-12 md:grid-cols-2 md:items-start">
           <ContactInfo socialLinks={socialLinks} y={y} />
-          <ContactForm form={form} onSubmit={onSubmit} y={y} />
+          <ContactForm
+            form={form}
+            onSubmit={onSubmit}
+            y={y}
+            isSubmitting={isSubmitting}
+          />
         </div>
       </div>
 
@@ -212,10 +258,12 @@ function ContactForm({
   form,
   onSubmit,
   y,
+  isSubmitting,
 }: {
   form: any;
   onSubmit: any;
   y: any;
+  isSubmitting: boolean;
 }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.3 });
@@ -299,8 +347,9 @@ function ContactForm({
               <Button
                 type="submit"
                 className="w-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600"
+                disabled={isSubmitting}
               >
-                Send Message
+                {isSubmitting ? "Sending..." : "Send Message"}
               </Button>
             </motion.div>
           </form>

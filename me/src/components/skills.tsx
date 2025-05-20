@@ -23,19 +23,18 @@ export default function Skills() {
     "CSS3",
     "Tailwind CSS",
     "Framer Motion",
-    "Redux",
-    "GraphQL",
+    "Shadcn UI",
   ];
 
   const backendSkills = [
     "Node.js",
     "Express",
-    "Python",
     "Django",
     "PostgreSQL",
+    "Neon",
     "MongoDB",
-    "Firebase",
-    "AWS",
+    "Prisma",
+    "Nest.js",
     "Docker",
     "RESTful APIs",
   ];
@@ -44,13 +43,13 @@ export default function Skills() {
     "Git",
     "GitHub",
     "VS Code",
+    "Filen",
     "Figma",
-    "Jest",
-    "Cypress",
-    "Webpack",
-    "CI/CD",
+    "PgAdmin",
+    "Swagger",
+    "Docker",
     "Vercel",
-    "Netlify",
+    "Vibes",
   ];
 
   return (
